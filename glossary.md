@@ -1,0 +1,13 @@
+terms:
+comment(s)
+post(s)
+likes
+dislikes
+img
+tag(s)
+user(s)
+topComment
+search
+userId
+postId
+commentId

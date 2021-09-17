@@ -29,5 +29,11 @@ class CommentsService {
     await comment.save()
     return comment
   }
+
+  async removeComment(commentId) {
+    const comment = await this.getCommentById(commentId)
+    await comment.delete()
+    return comment
+  }
 }
 export const commentsService = new CommentsService()

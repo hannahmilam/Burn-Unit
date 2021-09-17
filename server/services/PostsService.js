@@ -20,7 +20,17 @@ class PostsService {
 
   async editPost(postId, postData) {
     const post = await this.getPostById(postId)
-    post.
+    post.img = postData.img || post.img
+    await post.save()
+    return post
+  }
+
+  async getPostById(postId) {
+    const post = await dbContext.Posts.findById(postId)
+    if (!post) {
+      throw new BadRequest('invalaid postId')
+    }
+    return post
   }
 }
 

@@ -7,6 +7,7 @@ export class PostsController extends BaseController {
     super('api/posts')
     this.router
       .get('', this.getPosts)
+      .get('/:postId', this.getPostById)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createPost)
       .put('/:postId', this.editPost)
@@ -34,6 +35,15 @@ export class PostsController extends BaseController {
   async editPost(req, res, next) {
     try {
       const post = await postsService.editPost(req.params.postId, req.body)
+      res.send(post)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getPostById(req, res, next) {
+    try {
+      const post = await postsService.getPostById(req.params.postId)
       res.send(post)
     } catch (error) {
       next(error)

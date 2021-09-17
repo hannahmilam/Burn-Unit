@@ -32,7 +32,8 @@ export class PostsController {
 
     const postData = {
       img: form.img.value,
-      tag: form.tag.value
+      tag: form.tag.value,
+      postId: form.postId.value
     }
     try {
       if (form.postId.value) {

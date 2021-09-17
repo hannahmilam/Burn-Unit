@@ -1,6 +1,6 @@
 export class Post {
   constructor(postData) {
-    this.id = postData.id
+    this.postId = postData.postId
     this.creatorId = postData.creatorId
     this.img = postData.img
     this.tag = postData.tag

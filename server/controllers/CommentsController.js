@@ -9,9 +9,10 @@ export class CommentsController extends BaseController {
       .get('/:postId', this.getComments)
       .get('/:commentId', this.getCommentById)
       .use(Auth0Provider.getAuthorizedUserInfo)
-      .post('', this.createComment)
+      .post('/:postId', this.createComment)
       .put('/:commentId', this.editComment)
       .delete('/:commentId', this.removeComment)
+      .put('/:commentId/likes', this.editLike)
   }
 
   async getComments(req, res, next) {
@@ -44,7 +45,7 @@ export class CommentsController extends BaseController {
 
   async editComment(req, res, next) {
     try {
-      const comment = await commentsService.editComment(req.params.commentId, req.body)
+      const comment = await commentsService.editComment(req.params.commentId, req.userInfo.id, req.body)
       res.send(comment)
     } catch (error) {
       next(error)
@@ -55,6 +56,15 @@ export class CommentsController extends BaseController {
     try {
       const post = await commentsService.removeComment(req.params.commentId)
       res.send(post)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async editLike(req, res, next) {
+    try {
+      const comment = await commentsService.editLike(req.params.postId, req.userInfo.id, req.body.value)
+      res.send(comment)
     } catch (error) {
       next(error)
     }

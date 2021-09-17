@@ -9,8 +9,8 @@ export const LikesSchema = new Schema([
 export const CommentSchema = new Schema(
   {
     description: { type: String, required: true },
-    postId: { type: Schema.Types.ObjectId, ref: 'Post', required: true },
-    creatorId: { type: Schema.Types.ObjectId, ref: 'Account', required: true },
+    postId: { type: Schema.Types.ObjectId, ref: 'Post' },
+    creatorId: { type: Schema.Types.ObjectId, ref: 'Account' },
     likes: [LikesSchema]
   },
   { timestamps: true, toJSON: { virtuals: true } }

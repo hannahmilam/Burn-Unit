@@ -1,5 +1,5 @@
 import { dbContext } from '../db/DbContext.js'
-import { BadRequest } from '../utils/Errors.js'
+import { BadRequest, Forbidden } from '../utils/Errors.js'
 
 class CommentsService {
   async getComments(postId) {
@@ -20,12 +20,12 @@ class CommentsService {
     return comment
   }
 
-  async editComment(commentId, cData) {
+  async editComment(commentId, userId, cData) {
     const comment = await this.getCommentById(commentId)
-
+    if (userId !== comment.creatorId.toString()) {
+      throw new Forbidden('You did not make this comment')
+    }
     comment.description = cData.description || comment.description
-    comment.postId = cData.postId || comment.postId
-
     await comment.save()
     return comment
   }
@@ -33,6 +33,20 @@ class CommentsService {
   async removeComment(commentId) {
     const comment = await this.getCommentById(commentId)
     await comment.delete()
+    return comment
+  }
+
+  async editLike(commentId, creatorId, value) {
+    const comment = await dbContext.Comments.findById(commentId)
+    const liked = comment.likes.find(l => l.creatorId.toString() === creatorId)
+    if (liked) {
+      liked.value = value
+    } else {
+      comment.likes.push({
+        creatorId, value
+      })
+    }
+    await comment.save()
     return comment
   }
 }

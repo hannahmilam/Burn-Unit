@@ -20,7 +20,7 @@ class PostsService {
 
   async editPost(postId, postData) {
     const post = await this.getPostById(postId)
-    post.de
+    post.
   }
 }
 

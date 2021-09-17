@@ -19,12 +19,12 @@ class PostsService {
 
   async editPost(postId, postData) {
     await api.put(`api/posts/${postId}`, postData)
-    ProxyState.posts = ProxyState.posts.filter(p => p.id !== postId)
+    ProxyState.posts = ProxyState.posts.filter(p => p.postId !== postId)
   }
 
   async removePost(postId) {
     await api.delete(`api/posts/${postId}`)
-    ProxyState.posts = ProxyState.posts.filter(p => p.id !== postId)
+    ProxyState.posts = ProxyState.posts.filter(p => p.postId !== postId)
   }
 }
 export const postsService = new PostsService()

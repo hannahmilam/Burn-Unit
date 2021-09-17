@@ -7,6 +7,27 @@ class CommentsService {
     return comments
   }
 
-  async getCommentById()
+  async getCommentById(commentId) {
+    const comment = await dbContext.Comments.findById(commentId)
+    if (!comment) {
+      throw new BadRequest('Invalid commentId')
+    }
+    return comment
+  }
+
+  async createComment(cData) {
+    const comment = await dbContext.Comments.create(cData)
+    return comment
+  }
+
+  async editComment(commentId, cData) {
+    const comment = await this.getCommentById(commentId)
+
+    comment.description = cData.description || comment.description
+    comment.postId = cData.postId || comment.postId
+
+    await comment.save()
+    return comment
+  }
 }
-export class commentsService = new CommentsService()
+export const commentsService = new CommentsService()

@@ -10,6 +10,7 @@ export class CommentsController extends BaseController {
       .get('/:commentId', this.getCommentById)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createComment)
+      .put('/:commentId', this.editComment)
   }
 
   async getComments(req, res, next) {
@@ -34,6 +35,15 @@ export class CommentsController extends BaseController {
     try {
       req.body.creatorId = req.userInfo.id
       const comment = await commentsService.createComment(req.body)
+      res.send(comment)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async editComment(req, res, next) {
+    try {
+      const comment = await commentsService.editComment(req.params.commentId, req.body)
       res.send(comment)
     } catch (error) {
       next(error)

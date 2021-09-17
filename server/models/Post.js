@@ -3,8 +3,6 @@ const Schema = mongoose.Schema
 
 export const PostSchema = new Schema(
   {
-    title: { type: String, reqired: true },
-    description: { type: String, required: true },
     img: { type: String, required: true },
     tag: { type: String, required: true },
     creatorId: { type: Schema.Types.ObjectId, ref: 'Account', required: true }

@@ -15,7 +15,7 @@ export class PostsController {
   }
 
   async getPosts() {
-    debugger
+    // debugger
     try {
       await postsService.getPosts()
     } catch (error) {
@@ -71,4 +71,12 @@ export class PostsController {
     const post = ProxyState.posts.find(p => p.postId === postId)
     document.getElementById('modal-body').innerHTML = getCreatePostTemplate(post)
   }
+
+  // async likePost(){
+
+  // }
+
+  // async getComments(){
+
+  // }
 }

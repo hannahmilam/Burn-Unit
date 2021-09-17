@@ -8,6 +8,12 @@ class AppState extends EventEmitter {
 
    /** @type {import('./Models/Post').Post[]} */
    posts = []
+
+   comments = []
+
+  //  topComment = {
+
+  //  }
 }
 
 export const ProxyState = new Proxy(new AppState(), {

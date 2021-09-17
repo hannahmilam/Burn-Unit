@@ -17,6 +17,11 @@ class PostsService {
     }
     return post
   }
+
+  async editPost(postId, postData) {
+    const post = await this.getPostById(postId)
+    post.de
+  }
 }
 
 export const postsService = new PostsService()

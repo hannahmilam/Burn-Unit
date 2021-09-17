@@ -36,25 +36,14 @@ export class PostsController {
       postId: form.postId.value
     }
     try {
-      if (form.postId.value) {
-        await postsService.editPost(form.postId.value, postData)
-      } else {
-        await postsService.createPost(postData)
-      }
+      // if (form.postId.value) {
+      //   await postsService.editPost(form.postId.value, postData)
+      // } else {
+      await postsService.createPost(postData)
     } catch (error) {
       logger.log('⚠ POST_DATA', error)
     }
     form.reset()
-  }
-
-  showPosts() {
-    _drawPosts()
-    document.getElementById('controls').innerHTML = `
-    <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
-   Create Post
-  </button>
-    `
-    document.getElementById('modal-body').innerHTML = getCreatePostTemplate(postData)
   }
 
   async editPost(postId) {

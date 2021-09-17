@@ -17,6 +17,9 @@ class CommentsService {
 
   async createComment(cData) {
     const comment = await dbContext.Comments.create(cData)
+    if (!comment) {
+      throw new BadRequest('there is no comment')
+    }
     return comment
   }
 

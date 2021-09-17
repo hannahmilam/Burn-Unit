@@ -21,7 +21,10 @@
         <img src="https://codeworks.blob.core.windows.net/public/assets/img/cw-mark.png" height="45" alt=""
           loading="lazy">
         <span class="ml-2">BOOM ROASTED</span>
-        <button class="btn btn-success" onclick="app.postsController.showEditPostForm()">create post</button>
+        <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#formsModal"
+          onclick="app.postsController.showEditPostForm()">
+          Create Post
+        </button>
       </a>
 
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -72,6 +75,10 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="col text-end" id="controls">
+    <!-- Post controls go here -->
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

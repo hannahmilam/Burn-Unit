@@ -15,6 +15,7 @@ export class PostsController {
   }
 
   async getPosts() {
+    debugger
     try {
       await postsService.getPosts()
     } catch (error) {
@@ -23,11 +24,13 @@ export class PostsController {
   }
 
   async createPost() {
+    // eslint-disable-next-line no-undef
     event.preventDefault()
     /**
     * @type{HTMLFormElement}
     */
     // @ts-ignore
+    // eslint-disable-next-line no-undef
     const form = event.target
 
     const postData = {
@@ -40,6 +43,8 @@ export class PostsController {
       //   await postsService.editPost(form.postId.value, postData)
       // } else {
       await postsService.createPost(postData)
+      // eslint-disable-next-line no-undef
+      $('#formsModal').modal('toggle')
     } catch (error) {
       logger.log('⚠ POST_DATA', error)
     }
@@ -62,8 +67,8 @@ export class PostsController {
     }
   }
 
-  showEditPostForm(postId) {
-    const post = ProxyState.posts.find(p => p.id === postId)
+  showCreatePostForm(postId) {
+    const post = ProxyState.posts.find(p => p.postId === postId)
     document.getElementById('modal-body').innerHTML = getCreatePostTemplate(post)
   }
 }

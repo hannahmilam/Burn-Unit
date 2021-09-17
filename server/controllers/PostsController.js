@@ -12,6 +12,7 @@ export class PostsController extends BaseController {
       .post('', this.createPost)
       .put('/:postId', this.editPost)
       .delete('/:postId', this.removePost)
+      .put('/:postId/likes', this.editLike)
   }
 
   async getPosts(req, res, next) {
@@ -35,7 +36,7 @@ export class PostsController extends BaseController {
 
   async editPost(req, res, next) {
     try {
-      const post = await postsService.editPost(req.params.postId, req.body)
+      const post = await postsService.editPost(req.params.postId, req.body, req.userInfo.id)
       res.send(post)
     } catch (error) {
       next(error)
@@ -53,7 +54,16 @@ export class PostsController extends BaseController {
 
   async removePost(req, res, next) {
     try {
-      const post = await postsService.removePost(req.params.postId)
+      const post = await postsService.removePost(req.params.postId, req.userInfo.id)
+      res.send(post)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async editLike(req, res, next) {
+    try {
+      const post = await postsService.editLike(req.params.postId, req.userInfo.id, req.body.value)
       res.send(post)
     } catch (error) {
       next(error)

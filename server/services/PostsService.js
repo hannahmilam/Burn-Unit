@@ -33,6 +33,7 @@ class PostsService {
       throw new Forbidden('You did not make this post')
     }
     post.img = postData.img || post.img
+    post.tag = postData.tag || post.tag
     await post.save()
     return post
   }

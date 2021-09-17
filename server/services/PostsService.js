@@ -32,6 +32,12 @@ class PostsService {
     }
     return post
   }
+
+  async removePost(postId) {
+    const post = await this.getPostById(postId)
+    await post.delete()
+    return post
+  }
 }
 
 export const postsService = new PostsService()

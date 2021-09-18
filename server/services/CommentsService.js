@@ -2,8 +2,8 @@ import { dbContext } from '../db/DbContext.js'
 import { BadRequest, Forbidden } from '../utils/Errors.js'
 
 class CommentsService {
-  async getComments(postId) {
-    const comments = await dbContext.Comments.find({ postId })
+  async getComments(query = {}) {
+    const comments = await dbContext.Comments.find(query)
     return comments
   }
 

@@ -1,3 +1,5 @@
+import { ProxyState } from '../AppState.js'
+
 export class Post {
   constructor(postData) {
     this.postId = postData._id
@@ -21,19 +23,29 @@ export class Post {
           </div>
           </div>
           <div class="card-body" id="topComment">
-          <div id="comment-list-${this.postId}">
           <form>
-          <div class="mb-3">
-            <label for="" class="form-label"></label>
-            <input type="text" class="form-control" id="">
-            <div id="" class="form-text"></div>
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+            <div class="mb-3">
+              <label for="" class="form-label"></label>
+              <input type="text" class="form-control" id="">
+              <div id="" class="form-text"></div>
+              <button type="submit" class="btn btn-primary" onsubmit="app.commentsController.postComment('${this.postId}')">Submit</button>
+            </div>
+          </form>
+        <div id="comment-list-${this.postId}">
+        ${this.drawComments()}
           </div>
           </div>
         </div>
       </div>
     `
+  }
+
+  drawComments() {
+    // this filters selects only the comments that exist for this post
+    const comments = ProxyState.comments.filter(c => c.postId === this.id)
+    let template = ''
+    // the comments.forEach builds out the comments string to be returned
+    comments.forEach(c => { template += c.CommentTemplate })
+    return template
   }
 }

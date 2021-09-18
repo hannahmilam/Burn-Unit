@@ -6,7 +6,7 @@ export class CommentsController extends BaseController {
   constructor() {
     super('api/comments')
     this.router
-      .get('/:postId', this.getComments)
+      .get('', this.getComments)
       .get('/:commentId', this.getCommentById)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('/:postId', this.createComment)

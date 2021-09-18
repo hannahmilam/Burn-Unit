@@ -27,6 +27,9 @@ class CommentsService {
 
   async removeComment(commentId) {
     const comment = await this.getCommentById(commentId)
+    if (userId !== comment.creatorId.toString()) {
+      throw new Forbidden('You did not create this comment')
+    }
     await comment.delete()
     return comment
   }

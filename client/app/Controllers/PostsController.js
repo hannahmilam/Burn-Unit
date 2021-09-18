@@ -13,6 +13,7 @@ export class PostsController {
     ProxyState.on('posts', _drawPosts)
     this.getPosts()
     ProxyState.on('comments', _drawPosts)
+    ProxyState.on('account', _drawPosts)
   }
 
   async getPosts() {
@@ -72,11 +73,11 @@ export class PostsController {
     document.getElementById('modal-body').innerHTML = getCreatePostTemplate(post)
   }
 
-  // async likePost(){
-
-  // }
-
-  // async getComments(){
-
-  // }
+  async likePost(postId) {
+    try {
+      await postsService.likePost(postId)
+    } catch (error) {
+      logger.log('⚠ LIKE_POST', error)
+    }
+  }
 }

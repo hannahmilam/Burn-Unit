@@ -26,5 +26,14 @@ class PostsService {
     await api.delete(`api/posts/${postId}`)
     ProxyState.posts = ProxyState.posts.filter(p => p.postId !== postId)
   }
+
+  async likePost(postId) {
+    logger.log('likes post', postId)
+    const res = await api.put(`api/posts/${postId}/likes`, { value: 1 })
+    const i = ProxyState.posts.findIndex(p => p.postId === postId)
+    ProxyState.posts.splice(i, 1, new Post(res.data))
+    ProxyState.posts = [...ProxyState.posts]
+  }
+  // NOTE this function takes the array of posts. find index takes the position you are in the array, then removes(with the splice) that item and replace it with itself with its updated data and keeps it in its same position in the array.
 }
 export const postsService = new PostsService()

@@ -1,3 +1,4 @@
+import { ProxyState } from '../AppState.js'
 export class Comment {
   constructor(commentData) {
     this.commentId = commentData._id
@@ -10,7 +11,9 @@ export class Comment {
 
   get CommentTemplate() {
     return /* html */ `
-    <p>${this.description} <i class="fas fa-minus-circle selectable" onclick="app.commentsController.removeComment('${this.commentId}')"></i></p>
+    <p>${this.description} 
+     
+    <i class="fas fa-minus-circle selectable  ${this.creatorId === ProxyState.account.id ? '' : 'visually-hidden'}" onclick="app.commentsController.removeComment('${this.commentId}')"></i></p>
     `
   }
 }

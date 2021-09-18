@@ -15,7 +15,6 @@ export const CommentSchema = new Schema(
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )
-CommentSchema.index({ postId: 1, creatorId: 1 }, { unique: true })
 
 CommentSchema.virtual('post', {
   localField: 'postId',

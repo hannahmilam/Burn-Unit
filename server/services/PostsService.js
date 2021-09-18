@@ -51,10 +51,11 @@ class PostsService {
     const post = await dbContext.Posts.findById(postId)
     const liked = post.likes.find(l => l.creatorId.toString() === creatorId)
     if (liked) {
-      liked.value = value
+      // liked.value = value
+      liked.remove()
     } else {
       post.likes.push({
-        creatorId, value
+        creatorId, value: 1
       })
     }
     await post.save()

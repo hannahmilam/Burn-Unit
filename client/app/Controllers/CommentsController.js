@@ -7,10 +7,16 @@ import { logger } from '../Utils/Logger.js'
 //   ProxyState.comments.forEach(c => { template += c.Template })
 //   document.getElementById('comments').innerHTML = template
 // }
+function _drawCommentCounter(postId) {
+  const commentCount = ProxyState.comments.length
+  document.getElementById('commentCounter').innerHTML = commentCount.toString()
+  logger.log('_DRAW COMMENT COUNTER', ProxyState.comments.length)
+}
 
 export class CommentsController {
   constructor() {
     this.getComments()
+    ProxyState.on('comments', _drawCommentCounter)
   }
 
   async getComments() {

@@ -22,11 +22,10 @@
     <nav class="navbar navbar-dark navbar-expand text-light">
       <a class="navbar-brand" href="#">
 
-        <span class="header-text">BOOM ROASTED <img src="./assets/img/fire.png" height="45" alt=""
-            loading="lazy"></span>
+        <span class="header-text me-5">BOOM ROASTED</span>
         <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#formsModal"
           onclick="app.postsController.showCreatePostForm()">
-          Create Post
+          New Post <i class="fas fa-plus"></i>
         </button>
       </a>
 
@@ -61,13 +60,13 @@
   </main> -->
 
   <div class="container-fluid">
-    <div class="row" id="posts">
+    <div class="masonry-with-columns" id="posts">
       <!-- POSTS GO HERE :D -->
     </div>
   </div>
 
 
-  <div class="modal fade" id="formsModal" tabindex="-1" aria-labelledby="formsModalLabel" aria-hidden="true">
+  <div class="modal fade p-0" id="formsModal" tabindex="-1" aria-labelledby="formsModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -80,8 +79,12 @@
     </div>
   </div>
 
-  <div class="col text-end" id="controls">
-    <!-- Post controls go here -->
+  <div class="container">
+    <figure>
+      <div class="col text-end" id="controls">
+        <!-- Post controls go here -->
+      </div>
+    </figure>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
     integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="

@@ -9,8 +9,8 @@ export class Post {
 
   get Template() {
     return /* html */ `
-    <div class="col-lg-3 p-3">
-        <div class="card shadow">
+    <div class="p-3">
+        <div class="card">
           <div class="card-header text-center">
             <img src="${this.img}" alt="post image"
               class="rounded img-fluid ">

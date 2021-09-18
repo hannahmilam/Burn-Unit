@@ -10,14 +10,6 @@ export class Comment {
 
   get CommentTemplate() {
     return /* html */ `
-    <form>
-          <div class="mb-3">
-            <label for="" class="form-label"></label>
-            <input type="text" class="form-control" id="" placeholder="Roast em'">
-            <div id="" class="form-text"></div>
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
     <li><p>${this.description}</p></li>
     `
   }

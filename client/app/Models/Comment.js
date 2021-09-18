@@ -10,7 +10,7 @@ export class Comment {
 
   get CommentTemplate() {
     return /* html */ `
-    <li><p>${this.description}</p></li>
+    <p>${this.description} <i class="fas fa-minus-circle selectable" onclick="app.commentsController.removeComment('${this.commentId}')"></i></p>
     `
   }
 }

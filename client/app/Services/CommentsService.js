@@ -4,18 +4,23 @@ import { logger } from '../Utils/Logger.js'
 import { api } from './AxiosService.js'
 
 class CommentsService {
-  async getComments(postId) {
+  async getComments() {
     const res = await api.get('api/comments')
     logger.log('getComments', res)
     ProxyState.comments = res.data.map(c => new Comment(c))
     logger.log('getComments response', res)
   }
 
-  async postComment(postId) {
-    console.log(postId)
-    const res = await api.post(`api/comments/${postId}`)
-    logger.log(res)
-    ProxyState.comments = res.data.map(c => new Comment(c))
+  async createComment(commentData) {
+    logger.log('create comment data', commentData)
+    const res = await api.post(`api/comments/${commentData.postId}`, commentData)
+    logger.log('createComment response', res)
+    ProxyState.comments = [...ProxyState.comments, new Comment(res.data)]
+  }
+
+  async removeComment(commentId) {
+    await api.delete(`api/comments/${commentId}`)
+    ProxyState.comments = ProxyState.comments.filter(c => c.commentId !== commentId)
   }
 }
 

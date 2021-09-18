@@ -12,10 +12,10 @@ export class PostsController {
   constructor() {
     ProxyState.on('posts', _drawPosts)
     this.getPosts()
+    ProxyState.on('comments', _drawPosts)
   }
 
   async getPosts() {
-    // debugger
     try {
       await postsService.getPosts()
     } catch (error) {

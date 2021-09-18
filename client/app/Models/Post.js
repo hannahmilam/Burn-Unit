@@ -2,7 +2,7 @@ import { ProxyState } from '../AppState.js'
 
 export class Post {
   constructor(postData) {
-    this.postId = postData._id
+    this.postId = postData.id
     this.creatorId = postData.creatorId
     this.img = postData.img
     this.tag = postData.tag
@@ -23,16 +23,15 @@ export class Post {
           </div>
           </div>
           <div class="card-body" id="topComment">
-          <form>
-            <div class="mb-3">
-              <label for="" class="form-label"></label>
-              <input type="text" class="form-control" id="">
-              <div id="" class="form-text"></div>
-              <button type="submit" class="btn btn-primary" onsubmit="app.commentsController.postComment('${this.postId}')">Submit</button>
-            </div>
+          </div>
+
+          <div class="card-footer" id="comments">
+          <form onsubmit="app.commentsController.createComment('${this.postId}')">
+              <label for="description" class=""></label>
+              <input type="text" name="description" id="comment" placeholder="add comment" class="form-control"  required>
+              <button type="submit" class="btn btn-secondary p-2 m-5">Submit</button>
           </form>
-        <div id="comment-list-${this.postId}">
-        ${this.drawComments()}
+         ${this.Comments}
           </div>
           </div>
         </div>
@@ -40,12 +39,10 @@ export class Post {
     `
   }
 
-  drawComments() {
-    // this filters selects only the comments that exist for this post
-    const comments = ProxyState.comments.filter(c => c.postId === this.id)
+  get Comments() {
     let template = ''
-    // the comments.forEach builds out the comments string to be returned
-    comments.forEach(c => { template += c.CommentTemplate })
+    const foundComments = ProxyState.comments.filter(c => c.postId === this.postId)
+    foundComments.forEach(c => { template += c.CommentTemplate })
     return template
   }
 }

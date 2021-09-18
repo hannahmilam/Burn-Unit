@@ -1,8 +1,11 @@
+import { ProxyState } from '../AppState.js'
 import { commentsService } from '../Services/CommentsService.js'
 import { logger } from '../Utils/Logger.js'
 
-// function _drawTopComment(){
-//   document.getElementById('topComment').innerHTML =
+// function _drawComments() {
+//   let template = ''
+//   ProxyState.comments.forEach(c => { template += c.Template })
+//   document.getElementById('comments').innerHTML = template
 // }
 
 export class CommentsController {
@@ -10,22 +13,40 @@ export class CommentsController {
     this.getComments()
   }
 
-  async getComments(postId) {
+  async getComments() {
     try {
-      await commentsService.getComments(postId)
+      await commentsService.getComments()
     } catch (error) {
-      logger.log(error)
+      logger.log('⚠ GET_COMMENTS', error)
     }
   }
 
-  async postComment(postId) {
+  async createComment(postId) {
+    // eslint-disable-next-line no-undef
+    event.preventDefault()
+    /**
+     * @type{HTMLFormElement}
+     */
+    // @ts-ignore
+    // eslint-disable-next-line no-undef
+    const form = event.target
+    const commentData = {
+      description: form.description.value
+    }
     try {
-      // @ts-ignore
-      event.preventDefault()
-      debugger
-      await commentsService.postComment(postId)
+      commentData.postId = postId
+      await commentsService.createComment(commentData)
     } catch (error) {
-      console.error(error)
+      logger.log('⚠ CREATE_COMMENT', error)
+    }
+    form.reset()
+  }
+
+  async removeComment(commentId) {
+    try {
+      await commentsService.removeComment(commentId)
+    } catch (error) {
+      logger.log('⚠ REMOVE_COMMENT', error)
     }
   }
 }

@@ -8,7 +8,7 @@ class PostsService {
     const res = await api.get('api/posts')
     logger.log('getPosts', res)
     ProxyState.posts = res.data.map(p => new Post(p))
-    logger.log('getPosts response', res)
+    logger.log('getPosts response', ProxyState.posts)
   }
 
   async createPost(postData) {

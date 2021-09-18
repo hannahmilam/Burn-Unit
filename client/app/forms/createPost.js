@@ -9,10 +9,10 @@ export function getCreatePostTemplate(postData) {
   <input id="postId" value="${postData.id}" class="visually-hidden"/>
 
   <label for="img" class="">Image: </label>
-  <input id="img" value="img" type="text" class="form-control" name="img" required>
+  <input id="img" type="text" placeholder="insert image URL" class="form-control" name="img" required>
 
   <label for="tag" class="">Tag: </label>
-  <select name="tag" id="tag" value="tag" required class="form-control">
+  <select name="tag" id="tag" placeholder="add tag" required class="form-control">
   <option disabled selected value="">#</option> 
   <option>Celebrities</option>
   <option>Normies</option>

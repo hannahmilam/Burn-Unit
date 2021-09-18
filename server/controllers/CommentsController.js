@@ -33,16 +33,6 @@ export class CommentsController extends BaseController {
     }
   }
 
-  async createComment(req, res, next) {
-    try {
-      req.body.creatorId = req.userInfo.id
-      const comment = await commentsService.createComment(req.body)
-      res.send(comment)
-    } catch (error) {
-      next(error)
-    }
-  }
-
   async editComment(req, res, next) {
     try {
       const comment = await commentsService.editComment(req.params.commentId, req.userInfo.id, req.body)
@@ -64,6 +54,16 @@ export class CommentsController extends BaseController {
   async editLike(req, res, next) {
     try {
       const comment = await commentsService.editLike(req.params.postId, req.userInfo.id, req.body.value)
+      res.send(comment)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async createComment(req, res, next) {
+    try {
+      req.body.creatorId = req.userInfo.id
+      const comment = await commentsService.createComment(req.body)
       res.send(comment)
     } catch (error) {
       next(error)

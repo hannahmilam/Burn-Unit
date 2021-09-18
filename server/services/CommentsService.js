@@ -15,14 +15,6 @@ class CommentsService {
     return comment
   }
 
-  async createComment(cData) {
-    const comment = await dbContext.Comments.create(cData)
-    if (!comment) {
-      throw new BadRequest('there is no comment')
-    }
-    return comment
-  }
-
   async editComment(commentId, userId, cData) {
     const comment = await this.getCommentById(commentId)
     if (userId !== comment.creatorId.toString()) {
@@ -50,6 +42,14 @@ class CommentsService {
       })
     }
     await comment.save()
+    return comment
+  }
+
+  async createComment(cData) {
+    const comment = await dbContext.Comments.create(cData)
+    if (!comment) {
+      throw new BadRequest('there is no comment')
+    }
     return comment
   }
 }

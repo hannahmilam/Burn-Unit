@@ -19,16 +19,19 @@ export class Post {
 
             <i class="far fa-comment selected ps-5 pt-3 selectable" onclick="app.commentsController.getComments('${this.postId}')"></i><span id="commentCounter"></span>
           </div>
-          <div class="card-body" id="topComment">
+          <div class="card-body p-1" id="topComment">
           <div id="comment-list-${this.postId}">
-          <form>
-          <div class="mb-3">
-            <label for="" class="form-label"></label>
-            <input type="text" class="form-control" id="">
             <div id="" class="form-text"></div>
           </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+          <form>
+            <label for="" class="form-label"></label>
+            <input type="text" class="form-control" id="" placeholder="Roast em'">
+            <div id="" class="form-text"></div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            </div>
+         
+        
           </div>
           </div>
         </div>
